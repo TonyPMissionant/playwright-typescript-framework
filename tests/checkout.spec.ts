@@ -4,6 +4,7 @@ import { CartPage } from '../pages/CartPage';
 import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
 import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
 import { checkoutUser } from '../data/checkoutData';
+import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
 
 test.describe('Checkout Flow', () => {
     let inventoryPage: InventoryPage;
@@ -15,13 +16,15 @@ test.describe('Checkout Flow', () => {
     });
 
 
-    test('user can enter the checkout information and view the checkout overview', async ({ page }) => {
+    test('user can complete the checkout flow successfully', async ({ page }) => {
 
         const cartpage = new CartPage(page);
 
         const checkoutOverviewPage = new CheckoutOverviewPage(page);
 
         const checkoutInformationPage = new CheckoutInformationPage(page);
+
+        const checkoutCompletePage = new CheckoutCompletePage(page);
 
         await inventoryPage.addBackpackToCartButton.click();
 
@@ -42,5 +45,11 @@ test.describe('Checkout Flow', () => {
         await expect(checkoutOverviewPage.backpackName).toBeVisible();
 
         await expect(checkoutOverviewPage.backpackPrice).toHaveText('$29.99');
+
+        await checkoutOverviewPage.finishButton.click();
+
+        await expect(checkoutCompletePage.pageHeading).toHaveText('Checkout: Complete!');
+
+        await expect(checkoutCompletePage.confirmationMessage).toHaveText('Thank you for your order!');
     });
 });
