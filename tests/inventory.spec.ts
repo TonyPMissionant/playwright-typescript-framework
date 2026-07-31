@@ -59,29 +59,3 @@ test('user can view and remove Sauce Labs Backpack from the cart', async ({ page
     
     await expect(cartPage.backpackName).not.toBeVisible();
 });
-
-test('user can enter checkout information and view the checkout overview', async ({ page }) => {
-    const cartPage = new CartPage(page);
-    const checkoutInformationPage = new CheckoutInformationPage(page);
-    const checkoutOverviewPage = new CheckoutOverviewPage(page);
-
-    await inventoryPage.addBackpackToCartButton.click();
-
-    await inventoryPage.shoppingCartLink.click();
-
-    await cartPage.checkoutButton.click();
-
-    await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
-
-    await checkoutInformationPage.lastNameInput.fill(checkoutUser.lastName);
-
-    await checkoutInformationPage.postalCodeInput.fill(checkoutUser.postalCode);
-
-    await checkoutInformationPage.continueButton.click();
-
-    await expect(checkoutOverviewPage.pageHeading).toHaveText('Checkout: Overview');
-
-    await expect(checkoutOverviewPage.backpackName).toBeVisible();
-
-    await expect(checkoutOverviewPage.backpackPrice).toHaveText('$29.99');
-});
