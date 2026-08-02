@@ -26,4 +26,16 @@ test.describe('Cart', () => {
 
         await expect(cartPage.backpackName).not.toBeVisible();
     });
+
+    test('@smoke @regression user can proceed to checkout from the cart', async ({ page }) => {
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addBackpackToCartButton.click();
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await cartPage.checkoutButton.click();
+
+        await expect(page).toHaveURL(/checkout-step-one\.html/);
+    });
 });
