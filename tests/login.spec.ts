@@ -16,7 +16,7 @@ test('@smoke @regression Test standard user can log in', async ({ page }) => {
 
   await expect(page).toHaveURL(/inventory.html/);
 });
-test('@regression user cannot log in with an invalid password', async ({ page }) => {
+test('@smoke @regression user cannot log in with an invalid password', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.login(
