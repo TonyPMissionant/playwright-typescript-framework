@@ -11,7 +11,7 @@ test.describe('Cart', () => {
         await page.goto('/inventory.html');
     });
 
-    test('user can view and remove Sauce Labs Backpack from the cart', async ({ page }) => {
+    test('@regression user can view and remove Sauce Labs Backpack from the cart', async ({ page }) => {
         const cartPage = new CartPage(page);
 
         await inventoryPage.addBackpackToCartButton.click();
