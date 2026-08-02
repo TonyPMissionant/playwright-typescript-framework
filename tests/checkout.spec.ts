@@ -16,7 +16,7 @@ test.describe('Checkout Flow', () => {
     });
 
 
-    test('user can complete the checkout flow successfully', async ({ page }) => {
+    test('@smoke @regression @e2e user can complete the checkout flow successfully', async ({ page }) => {
 
         const cartpage = new CartPage(page);
 
