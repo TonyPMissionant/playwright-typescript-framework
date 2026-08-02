@@ -14,7 +14,7 @@ test.describe('Checkout Validation', () => {
         inventoryPage = new InventoryPage(page);
         cartPage = new CartPage(page);
         checkoutInformationPage = new CheckoutInformationPage(page);
-        
+
         await page.goto('/inventory.html');
 
         await inventoryPage.addBackpackToCartButton.click();
@@ -51,5 +51,12 @@ test.describe('Checkout Validation', () => {
         await checkoutInformationPage.continueButton.click();
 
         await expect(checkoutInformationPage.errorMessage).toHaveText('Error: Postal Code is required');
+    });
+
+    test('@regression user can cancel checkout and return to the cart', async ({ page }) => {
+
+        await checkoutInformationPage.cancelButton.click();
+
+        await expect(page).toHaveURL(/cart\.html/);
     });
 });

@@ -7,6 +7,7 @@ export class CheckoutInformationPage {
     readonly postalCodeInput: Locator;
     readonly continueButton: Locator;
     readonly errorMessage: Locator;
+    readonly cancelButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -16,5 +17,6 @@ export class CheckoutInformationPage {
         this.postalCodeInput = page.locator('[data-test="postalCode"]');
         this.continueButton = page.locator('[data-test="continue"]');
         this.errorMessage = page.locator('[data-test="error"]');
+        this.cancelButton = page.locator('[data-test="cancel"]');
     }
 }
