@@ -7,24 +7,24 @@ import { checkoutUser } from '../data/checkoutData';
 test.describe('Checkout Validation', () => {
 
     let inventoryPage: InventoryPage;
+    let cartPage: CartPage;
+    let checkoutInformationPage: CheckoutInformationPage;
 
     test.beforeEach(async ({ page }) => {
         inventoryPage = new InventoryPage(page);
-
+        cartPage = new CartPage(page);
+        checkoutInformationPage = new CheckoutInformationPage(page);
+        
         await page.goto('/inventory.html');
-    });
-
-    test('should display an error when checkout information is missing', async ({ page }) => {
-
-        const cartPage = new CartPage(page);
-
-        const checkoutInformationPage = new CheckoutInformationPage(page);
 
         await inventoryPage.addBackpackToCartButton.click();
 
         await inventoryPage.shoppingCartLink.click();
 
         await cartPage.checkoutButton.click();
+    });
+
+    test('should display an error when checkout information is missing', async () => {
 
         await checkoutInformationPage.continueButton.click();
 
@@ -32,17 +32,7 @@ test.describe('Checkout Validation', () => {
             .toHaveText('Error: First Name is required');
     });
 
-    test('should display an error when last name is missing', async ({ page }) => {
-
-        const cartPage = new CartPage(page);
-
-        const checkoutInformationPage = new CheckoutInformationPage(page);
-
-        await inventoryPage.addBackpackToCartButton.click();
-
-        await inventoryPage.shoppingCartLink.click();
-
-        await cartPage.checkoutButton.click();
+    test('should display an error when last name is missing', async () => {
 
         await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
 
@@ -52,17 +42,7 @@ test.describe('Checkout Validation', () => {
 
     });
 
-    test('should display an error when postal code is missing', async ({ page }) => {
-
-        const cartPage = new CartPage(page);
-
-        const checkoutInformationPage = new CheckoutInformationPage(page);
-
-        await inventoryPage.addBackpackToCartButton.click();
-
-        await inventoryPage.shoppingCartLink.click();
-
-        await cartPage.checkoutButton.click();
+    test('should display an error when postal code is missing', async () => {
 
         await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
 
@@ -70,7 +50,6 @@ test.describe('Checkout Validation', () => {
 
         await checkoutInformationPage.continueButton.click();
 
-        await expect(checkoutInformationPage.errorMessage)
-            .toHaveText('Error: Postal Code is required');
+        await expect(checkoutInformationPage.errorMessage).toHaveText('Error: Postal Code is required');
     });
 });
