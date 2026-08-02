@@ -6,17 +6,17 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test('Test standard user can log in', async ({ page }) => {
+test('@smoke @regressoion Test standard user can log in', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.login(
     validUser.username,
     validUser.password
-  )
+  );
 
   await expect(page).toHaveURL(/inventory.html/);
 });
-test('user cannot log in with an invalid password', async ({ page }) => {
+test('@regression user cannot log in with an invalid password', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.login(

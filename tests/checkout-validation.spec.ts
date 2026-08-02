@@ -24,7 +24,7 @@ test.describe('Checkout Validation', () => {
         await cartPage.checkoutButton.click();
     });
 
-    test('should display an error when checkout information is missing', async () => {
+    test('@regression should display an error when checkout information is missing', async () => {
 
         await checkoutInformationPage.continueButton.click();
 
@@ -32,7 +32,7 @@ test.describe('Checkout Validation', () => {
             .toHaveText('Error: First Name is required');
     });
 
-    test('should display an error when last name is missing', async () => {
+    test('@regression should display an error when last name is missing', async () => {
 
         await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
 
