@@ -1,9 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
-import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
-import { checkoutUser } from '../data/checkoutData';
-import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
 
 let inventoryPage: InventoryPage;
 
@@ -13,22 +10,22 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/inventory.html');
 });
 
-test('inventory page displays the Products heading', async () => {
+test('@smoke @regression inventory page displays the Products heading', async () => {
 
     await expect(inventoryPage.productsHeading).toBeVisible();
 });
 
-test('inventory page displays the correct number of products', async () => {
+test('@regression inventory page displays the correct number of products', async () => {
 
     await expect(inventoryPage.inventoryItems).toHaveCount(6);
 });
 
-test('Sauce Labs Backpack is displayed on the inventory page', async () => {
+test('@regression Sauce Labs Backpack is displayed on the inventory page', async () => {
 
     await expect(inventoryPage.backpackName).toBeVisible();
 });
 
-test('user can add and remove Sauce Labs Backpack from cart', async () => {
+test('@smoke @regression user can add and remove Sauce Labs Backpack from cart', async () => {
 
     await inventoryPage.addBackpackToCartButton.click();
 
@@ -44,7 +41,7 @@ test('user can add and remove Sauce Labs Backpack from cart', async () => {
 
 });
 
-test('user can view and remove Sauce Labs Backpack from the cart', async ({ page }) => {
+test('@regression user can view and remove Sauce Labs Backpack from the cart', async ({ page }) => {
     const cartPage = new CartPage(page);
 
     await inventoryPage.addBackpackToCartButton.click();

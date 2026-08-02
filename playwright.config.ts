@@ -62,6 +62,7 @@ export default defineConfig({
     {
       name: 'authenticated-chromium',
       testMatch: /.*\.spec\.ts/,
+      testIgnore: /login\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/user.json',
@@ -72,6 +73,7 @@ export default defineConfig({
 {
   name: 'authenticated-firefox',
   testMatch: /.*\.spec\.ts/,
+  testIgnore: /login\.spec\.ts/,  
   use: {
     ...devices['Desktop Firefox'],
     storageState: 'playwright/.auth/user.json',
@@ -82,6 +84,7 @@ export default defineConfig({
 {
   name: 'authenticated-webkit',
   testMatch: /.*\.spec\.ts/,
+  testIgnore: /login\.spec\.ts/,
   use: {
     ...devices['Desktop Safari'],
     storageState: 'playwright/.auth/user.json',

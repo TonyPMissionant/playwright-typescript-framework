@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test('@smoke @regressoion Test standard user can log in', async ({ page }) => {
+test('@smoke @regression Test standard user can log in', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.login(
