@@ -4,7 +4,7 @@ import { CartPage } from '../pages/CartPage';
 import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
 import { checkoutUser } from '../data/checkoutData';
 
-test.describe('Checkout Validation', () => {
+test.describe('Checkout Information', () => {
 
     let inventoryPage: InventoryPage;
     let cartPage: CartPage;
