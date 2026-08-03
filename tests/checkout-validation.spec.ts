@@ -42,7 +42,7 @@ test.describe('Checkout Information', () => {
 
     });
 
-    test('should display an error when postal code is missing', async () => {
+    test('@regression should display an error when postal code is missing', async () => {
 
         await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
 
