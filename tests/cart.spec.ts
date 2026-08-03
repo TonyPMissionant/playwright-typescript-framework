@@ -11,7 +11,7 @@ test.describe('Cart', () => {
         await page.goto('/inventory.html');
     });
 
-    test('@regression user can view and remove Sauce Labs Backpack from the cart', async ({ page }) => {
+    test('@regression User can view and remove Sauce Labs Backpack from the cart', async ({ page }) => {
         const cartPage = new CartPage(page);
 
         await inventoryPage.addBackpackToCartButton.click();
@@ -27,7 +27,7 @@ test.describe('Cart', () => {
         await expect(cartPage.backpackName).not.toBeVisible();
     });
 
-    test('@smoke @regression user can proceed to checkout from the cart', async ({ page }) => {
+    test('@smoke @regression User can proceed to checkout from the cart', async ({ page }) => {
         const cartPage = new CartPage(page);
 
         await inventoryPage.addBackpackToCartButton.click();

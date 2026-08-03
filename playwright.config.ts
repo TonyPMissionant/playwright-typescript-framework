@@ -26,7 +26,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-     baseURL: 'http://www.saucedemo.com',
+    baseURL: 'http://www.saucedemo.com',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     screenshot: 'only-on-failure',
@@ -35,7 +35,7 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [ 
+  projects: [
     {
       name: 'setup',
       testMatch: /.*\.setup\.ts/,
@@ -50,15 +50,15 @@ export default defineConfig({
     {
       name: 'firefox',
       testMatch: /login\.spec\.ts/,
-      use: { ...devices['Desktop Firefox'] }, 
+      use: { ...devices['Desktop Firefox'] },
     },
 
     {
       name: 'webkit',
       testMatch: /login\.spec\.ts/,
-      use: { ...devices['Desktop Safari'] }, 
+      use: { ...devices['Desktop Safari'] },
     },
-      //Created a new project for authenticated user
+    //Created new projects for authenticated user
     {
       name: 'authenticated-chromium',
       testMatch: /.*\.spec\.ts/,
@@ -70,27 +70,27 @@ export default defineConfig({
       dependencies: ['setup'],
     },
 
-{
-  name: 'authenticated-firefox',
-  testMatch: /.*\.spec\.ts/,
-  testIgnore: /login\.spec\.ts/,  
-  use: {
-    ...devices['Desktop Firefox'],
-    storageState: 'playwright/.auth/user.json',
-  },
-  dependencies: ['setup'],
-},
+    {
+      name: 'authenticated-firefox',
+      testMatch: /.*\.spec\.ts/,
+      testIgnore: /login\.spec\.ts/,
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
 
-{
-  name: 'authenticated-webkit',
-  testMatch: /.*\.spec\.ts/,
-  testIgnore: /login\.spec\.ts/,
-  use: {
-    ...devices['Desktop Safari'],
-    storageState: 'playwright/.auth/user.json',
-  },
-  dependencies: ['setup'],
-},
+    {
+      name: 'authenticated-webkit',
+      testMatch: /.*\.spec\.ts/,
+      testIgnore: /login\.spec\.ts/,
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
