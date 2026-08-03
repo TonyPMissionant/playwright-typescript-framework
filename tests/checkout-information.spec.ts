@@ -25,7 +25,7 @@ test.describe('Checkout Information', () => {
         await cartPage.checkoutButton.click();
     });
 
-    test('@regression should display an error when checkout information is missing', async () => {
+    test('@regression Should display an error when checkout information is missing', async () => {
 
         await checkoutInformationPage.continueButton.click();
 
@@ -33,7 +33,7 @@ test.describe('Checkout Information', () => {
             .toHaveText('Error: First Name is required');
     });
 
-    test('@regression should display an error when last name is missing', async () => {
+    test('@regression Should display an error when last name is missing', async () => {
 
         await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
 
@@ -43,7 +43,7 @@ test.describe('Checkout Information', () => {
 
     });
 
-    test('@regression should display an error when postal code is missing', async () => {
+    test('@regression Should display an error when postal code is missing', async () => {
 
         await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
 
@@ -54,23 +54,19 @@ test.describe('Checkout Information', () => {
         await expect(checkoutInformationPage.errorMessage).toHaveText('Error: Postal Code is required');
     });
 
-    test('@regression user can enter valid checkout information and proceed to checkout overview', async ({ page }) => {
-
+    test('@regression User can enter valid checkout information and proceed to checkout overview', async ({ page }) => {
     const checkoutOverviewPage = new CheckoutOverviewPage(page);
 
     await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
-
     await checkoutInformationPage.lastNameInput.fill(checkoutUser.lastName);
-
     await checkoutInformationPage.postalCodeInput.fill(checkoutUser.postalCode);
-
     await checkoutInformationPage.continueButton.click();
 
     await expect(checkoutOverviewPage.pageHeading)
         .toHaveText('Checkout: Overview');
 });
 
-    test('@regression user can cancel checkout and return to the cart', async ({ page }) => {
+    test('@regression User can cancel checkout and return to the cart', async ({ page }) => {
 
         await checkoutInformationPage.cancelButton.click();
 
