@@ -1,7 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 
 export class InventoryPage {
-    readonly page: Page;
     readonly productsHeading: Locator;
     readonly inventoryItems: Locator;
     readonly backpackName: Locator;
@@ -11,7 +10,6 @@ export class InventoryPage {
     readonly shoppingCartLink: Locator;
 
     constructor(page: Page) {
-        this.page = page;
         this.productsHeading = page.locator('[data-test="title"]');
         this.inventoryItems = page.locator('[data-test="inventory-item"]');
         this.backpackName = page.getByText('Sauce Labs Backpack', { exact: true });
