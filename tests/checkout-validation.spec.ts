@@ -3,6 +3,7 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
 import { checkoutUser } from '../data/checkoutData';
+import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
 
 test.describe('Checkout Information', () => {
 
@@ -52,6 +53,22 @@ test.describe('Checkout Information', () => {
 
         await expect(checkoutInformationPage.errorMessage).toHaveText('Error: Postal Code is required');
     });
+
+    test('@regression user can enter valid checkout information and proceed to checkout overview', async ({ page }) => {
+
+    const checkoutOverviewPage = new CheckoutOverviewPage(page);
+
+    await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
+
+    await checkoutInformationPage.lastNameInput.fill(checkoutUser.lastName);
+
+    await checkoutInformationPage.postalCodeInput.fill(checkoutUser.postalCode);
+
+    await checkoutInformationPage.continueButton.click();
+
+    await expect(checkoutOverviewPage.pageHeading)
+        .toHaveText('Checkout: Overview');
+});
 
     test('@regression user can cancel checkout and return to the cart', async ({ page }) => {
 
