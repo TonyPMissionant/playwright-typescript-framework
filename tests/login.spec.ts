@@ -16,7 +16,7 @@ test('@smoke @regression Test standard user can log in', async ({ page }) => {
 
   await expect(page).toHaveURL(/inventory.html/);
 });
-test('@smoke @regression user cannot log in with an invalid password', async ({ page }) => {
+test('@smoke @regression User cannot log in with an invalid password', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.login(
@@ -24,5 +24,6 @@ test('@smoke @regression user cannot log in with an invalid password', async ({ 
     invalidUser.password
 );
 
-  await expect(loginPage.errorMessage).toHaveText('Epic sadface: Username and password do not match any user in this service');
+  await expect(loginPage.errorMessage).toHaveText(
+    'Epic sadface: Username and password do not match any user in this service');
 });
