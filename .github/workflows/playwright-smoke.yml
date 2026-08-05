@@ -1,6 +1,6 @@
-name: Playwright Regression Tests
+name: Playwright Smoke Tests
 on:
-  push:
+  pull_request:
     branches: [ main ]
 jobs:
   test:
@@ -15,11 +15,11 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run Playwright regression tests
-      run: npx playwright test --grep "@regression"
+    - name: Run Playwright smoke tests
+      run: npx playwright test --grep "@smoke"
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
-        name: playwright-report
+        name: playwright-smoke-report
         path: playwright-report/
         retention-days: 30

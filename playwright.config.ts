@@ -58,7 +58,7 @@ export default defineConfig({
       testMatch: /login\.spec\.ts/,
       use: { ...devices['Desktop Safari'] },
     },
-    //Created new projects for authenticated user
+    // Created new projects for authenticated user
     {
       name: 'authenticated-chromium',
       testMatch: /.*\.spec\.ts/,
