@@ -1,3 +1,4 @@
+# Runs the Playwright smoke test suite on pull requests
 name: Playwright Smoke Tests
 on:
   pull_request:
