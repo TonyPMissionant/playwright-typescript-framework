@@ -2,6 +2,9 @@ name: Playwright Regression Tests
 on:
   push:
     branches: [ main ]
+
+  schedule:
+    - cron: '0 6 * * 1-5' # Runs every weekday at 6:00 AM UTC
 jobs:
   test:
     timeout-minutes: 60
