@@ -1,9 +1,11 @@
+import { env } from '../utils/env';
+
 export const validUser = {
-    username: 'standard_user',
-    password: 'secret_sauce',
+    username: env.username,
+    password: env.password,
 };
 
 export const invalidUser = {
-    username: 'standard_user',
+    username: env.username,
     password: 'invalid_password',
 };
