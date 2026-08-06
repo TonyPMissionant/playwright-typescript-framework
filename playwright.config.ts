@@ -12,6 +12,10 @@ import { env } from './utils/env';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+console.log('Running in CI:', process.env.CI);
+console.log('BASE_URL from process.env:', process.env.BASE_URL);
+console.log('baseURL used by Playwright:', env.baseUrl);
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
