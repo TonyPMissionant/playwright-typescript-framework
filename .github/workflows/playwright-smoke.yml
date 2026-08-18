@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BASE_URL: http://www.saucedemo.com
+      BASE_URL: https://www.saucedemo.com
       USERNAME: standard_user
       PASSWORD: secret_sauce
     steps:
