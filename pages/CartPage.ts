@@ -1,14 +1,14 @@
 import { Page, Locator } from '@playwright/test';
 
 export class CartPage {
-    readonly backpackName: Locator;
     readonly checkoutButton: Locator;
     readonly cartItems: Locator;
+    readonly continueShopping: Locator;
 
     constructor(page: Page) {
-        this.backpackName = page.getByText('Sauce Labs Backpack', { exact: true });
         this.checkoutButton = page.locator('[data-test="checkout"]');
         this.cartItems = page.locator('.cart_item');
+        this.continueShopping = page.locator('[data-test="continue-shopping"]');
     }
     getCartItem(productName: string): Locator{
         

@@ -1,5 +1,4 @@
 import { Locator, Page } from '@playwright/test';
-import { url } from 'node:inspector';
 
 export class LoginPage {
 

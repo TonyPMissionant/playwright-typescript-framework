@@ -55,16 +55,17 @@ test.describe('Checkout Information', () => {
     });
 
     test('@regression User can enter valid checkout information and proceed to checkout overview', async ({ page }) => {
-    const checkoutOverviewPage = new CheckoutOverviewPage(page);
 
-    await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
-    await checkoutInformationPage.lastNameInput.fill(checkoutUser.lastName);
-    await checkoutInformationPage.postalCodeInput.fill(checkoutUser.postalCode);
-    await checkoutInformationPage.continueButton.click();
+        const checkoutOverviewPage = new CheckoutOverviewPage(page);
 
-    await expect(checkoutOverviewPage.pageHeading)
-        .toHaveText('Checkout: Overview');
-});
+        await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
+        await checkoutInformationPage.lastNameInput.fill(checkoutUser.lastName);
+        await checkoutInformationPage.postalCodeInput.fill(checkoutUser.postalCode);
+        await checkoutInformationPage.continueButton.click();
+
+        await expect(checkoutOverviewPage.pageHeading)
+            .toHaveText('Checkout: Overview');
+    });
 
     test('@regression User can cancel checkout and return to the cart', async ({ page }) => {
 

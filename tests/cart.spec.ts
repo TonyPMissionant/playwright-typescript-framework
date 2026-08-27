@@ -18,11 +18,11 @@ test.describe('Cart', () => {
 
         await inventoryPage.shoppingCartLink.click();
 
-        await expect(cartPage.backpackName).toBeVisible();
+        await expect(cartPage.getCartItem('Sauce Labs Backpack')).toBeVisible();
 
         await cartPage.removeCartItems('Sauce Labs Backpack');
 
-        await expect(cartPage.backpackName).not.toBeVisible();
+        await expect(cartPage.getCartItem('Sauce Labs Backpack')).not.toBeVisible();
     });
 
     test('@smoke @regression User can proceed to checkout from the cart', async ({ page }) => {
@@ -92,7 +92,7 @@ test.describe('Cart', () => {
     });
 
     test('@regression Cart displays the correct quantity for a product', async ({ page }) => {
-      
+
         const cartPage = new CartPage(page);
 
         await inventoryPage.addProductToCart('Sauce Labs Bike Light');
@@ -100,7 +100,7 @@ test.describe('Cart', () => {
         await inventoryPage.shoppingCartLink.click();
 
         await expect(cartPage.getCartItemQuantity('Sauce Labs Bike Light')).toHaveText('1');
-        
+
     });
 
     test('@regression Cart displays the correct price for Sauce Labs Bike Light', async ({ page }) => {
@@ -152,7 +152,7 @@ test.describe('Cart', () => {
         await cartPage.removeCartItems('Sauce Labs Backpack');
 
         await expect(cartPage.getCartItem('Sauce Labs Backpack')).not.toBeVisible();
-        
+
     })
 
     test('@regression User can add two products to cart', async ({ page }) => {
@@ -167,6 +167,28 @@ test.describe('Cart', () => {
         await expect(cartPage.getCartItem('Sauce Labs Bike Light')).toBeVisible();
         await expect(cartPage.getCartItem('Sauce Labs Backpack')).toBeVisible();
         await expect(cartPage.cartItems).toHaveCount(2);
+
+    })
+
+    test('@regression User can add product after removing a product and clicking continue shopping', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await cartPage.removeCartItems('Sauce Labs Backpack');
+
+        await cartPage.continueShopping.click();
+
+        await expect(page).toHaveURL(/inventory\.html/);
+
+        await inventoryPage.addProductToCart('Sauce Labs Bolt T-Shirt');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItem('Sauce Labs Bolt T-Shirt')).toBeVisible();
 
     })
 });

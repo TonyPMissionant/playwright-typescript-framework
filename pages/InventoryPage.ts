@@ -13,9 +13,9 @@ export class InventoryPage {
         this.shoppingCartLink = page.locator('[data-test="shopping-cart-link"]');
     }
     async addProductToCart(productName: string): Promise<void> {
-        const product = this.inventoryItems.filter({ hasText: productName});
+        const product = this.inventoryItems.filter({ hasText: productName });
 
-        await product.getByRole('button', { name: 'Add to cart'}).click();
+        await product.getByRole('button', { name: 'Add to cart' }).click();
 
     }
 

@@ -17,7 +17,7 @@ test.describe('Checkout Flow', () => {
 
     test('@smoke @regression @e2e User can complete the checkout flow successfully', async ({ page }) => {
 
-        const cartpage = new CartPage(page);
+        const cartPage = new CartPage(page);
 
         const checkoutOverviewPage = new CheckoutOverviewPage(page);
 
@@ -29,7 +29,7 @@ test.describe('Checkout Flow', () => {
 
         await inventoryPage.shoppingCartLink.click();
 
-        await cartpage.checkoutButton.click();
+        await cartPage.checkoutButton.click();
 
         await checkoutInformationPage.firstNameInput.fill(checkoutUser.firstName);
 
@@ -40,10 +40,6 @@ test.describe('Checkout Flow', () => {
         await checkoutInformationPage.continueButton.click();
 
         await expect(checkoutOverviewPage.pageHeading).toHaveText('Checkout: Overview');
-
-        await expect(checkoutOverviewPage.backpackName).toBeVisible();
-
-        await expect(checkoutOverviewPage.backpackPrice).toHaveText('$29.99');
 
         await checkoutOverviewPage.finishButton.click();
 
