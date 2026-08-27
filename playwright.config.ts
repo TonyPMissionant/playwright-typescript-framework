@@ -2,20 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 import { env } from './utils/env';
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
  * See https://playwright.dev/docs/test-configuration.
  */
-console.log('Running in CI:', process.env.CI);
-console.log('BASE_URL from process.env:', process.env.BASE_URL);
-console.log('baseURL used by Playwright:', env.baseUrl);
-
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -37,6 +25,11 @@ export default defineConfig({
     screenshot: 'only-on-failure',
 
     trace: 'retain-on-failure',
+    
+    //Added in slowMo to aid when required visual debugging.
+    launchOptions: {
+      slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : 0,
+    }
   },
 
   /* Configure projects for major browsers */
