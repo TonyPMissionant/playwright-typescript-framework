@@ -25,7 +25,7 @@ test.describe('Checkout Flow', () => {
 
         const checkoutCompletePage = new CheckoutCompletePage(page);
 
-        await inventoryPage.addBackpackToCartButton.click();
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
 
         await inventoryPage.shoppingCartLink.click();
 

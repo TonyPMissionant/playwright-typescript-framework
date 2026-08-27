@@ -18,7 +18,7 @@ test.describe('Checkout Information', () => {
 
         await page.goto('/inventory.html');
 
-        await inventoryPage.addBackpackToCartButton.click();
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
 
         await inventoryPage.shoppingCartLink.click();
 

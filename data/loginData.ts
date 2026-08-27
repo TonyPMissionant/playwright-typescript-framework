@@ -9,3 +9,8 @@ export const invalidUser = {
     username: env.username,
     password: 'invalid_password',
 };
+
+export const lockedOutUser = {
+    username: 'locked_out_user',
+    password: validUser.password,
+};

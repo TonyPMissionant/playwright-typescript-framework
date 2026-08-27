@@ -11,18 +11,16 @@ test.describe('Cart', () => {
         await page.goto('/inventory.html');
     });
 
-    test('@regression User can view and remove Sauce Labs Backpack from the cart', async ({ page }) => {
+    test('@regression User can view and remove product from the cart', async ({ page }) => {
         const cartPage = new CartPage(page);
 
-        await inventoryPage.addBackpackToCartButton.click();
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
 
         await inventoryPage.shoppingCartLink.click();
 
         await expect(cartPage.backpackName).toBeVisible();
 
-        await expect(cartPage.backpackQuantity).toHaveText('1');
-
-        await cartPage.removeBackpackButton.click();
+        await cartPage.removeCartItems('Sauce Labs Backpack');
 
         await expect(cartPage.backpackName).not.toBeVisible();
     });
@@ -30,7 +28,7 @@ test.describe('Cart', () => {
     test('@smoke @regression User can proceed to checkout from the cart', async ({ page }) => {
         const cartPage = new CartPage(page);
 
-        await inventoryPage.addBackpackToCartButton.click();
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
 
         await inventoryPage.shoppingCartLink.click();
 
@@ -38,4 +36,137 @@ test.describe('Cart', () => {
 
         await expect(page).toHaveURL(/checkout-step-one\.html/);
     });
+
+    test('@regression Cart displays the correct price for a Backpack', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItemPrice('Sauce Labs Backpack')).toHaveText('$29.99');
+
+    });
+
+    test('@regression Cart displays the correct price for a Bike Light ', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Bike Light');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItemPrice('Sauce Labs Bike Light')).toHaveText('$9.99');
+    });
+
+    test('regression Cart displays the correct price for a Bolt T-Shirt', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Bolt T-Shirt');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItemPrice('Sauce Labs Bolt T-Shirt')).toHaveText('$15.99');
+
+        await expect(cartPage.getCartItemQuantity('Sauce Labs Bolt T-Shirt')).toHaveText('1');
+
+    });
+
+    test('@regression Cart displays multiple different products', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
+        await inventoryPage.addProductToCart('Sauce Labs Bolt T-Shirt');
+        await inventoryPage.addProductToCart('Sauce Labs Bike Light');
+
+        await inventoryPage.shoppingCartBadge.click();
+
+        await expect(cartPage.getCartItem('Sauce Labs Backpack')).toBeVisible();
+        await expect(cartPage.getCartItem('Sauce Labs Bike Light')).toBeVisible();
+        await expect(cartPage.getCartItem('Sauce Labs Bolt T-Shirt')).toBeVisible();
+        await expect(cartPage.cartItems).toHaveCount(3);
+
+    });
+
+    test('@regression Cart displays the correct quantity for a product', async ({ page }) => {
+      
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Bike Light');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItemQuantity('Sauce Labs Bike Light')).toHaveText('1');
+        
+    });
+
+    test('@regression Cart displays the correct price for Sauce Labs Bike Light', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Bike Light');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItemPrice('Sauce Labs Bike Light')).toHaveText('$9.99');
+
+    })
+
+    test('@regression Cart contains exactly one item after adding Sauce Labs Backpack', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItemQuantity('Sauce Labs Backpack')).toHaveText('1');
+
+    })
+
+    test('@regression User can remove Sauce Labs Bike Light from cart', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Bike Light');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await cartPage.removeCartItems('Sauce Labs Bike Light');
+
+        await expect(cartPage.getCartItem('Sauce Labs Bike Light')).not.toBeVisible();
+
+    })
+
+    test('@regression User can remove Sauce Labs Backpack from cart', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await cartPage.removeCartItems('Sauce Labs Backpack');
+
+        await expect(cartPage.getCartItem('Sauce Labs Backpack')).not.toBeVisible();
+        
+    })
+
+    test('@regression User can add two products to cart', async ({ page }) => {
+
+        const cartPage = new CartPage(page);
+
+        await inventoryPage.addProductToCart('Sauce Labs Backpack');
+        await inventoryPage.addProductToCart('Sauce Labs Bike Light');
+
+        await inventoryPage.shoppingCartLink.click();
+
+        await expect(cartPage.getCartItem('Sauce Labs Bike Light')).toBeVisible();
+        await expect(cartPage.getCartItem('Sauce Labs Backpack')).toBeVisible();
+        await expect(cartPage.cartItems).toHaveCount(2);
+
+    })
 });
