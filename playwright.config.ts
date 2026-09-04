@@ -25,8 +25,8 @@ export default defineConfig({
     screenshot: 'only-on-failure',
 
     trace: 'retain-on-failure',
-    
-    //Added in slowMo to aid when required visual debugging.
+
+    // Added for optional visual debugging.
     launchOptions: {
       slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : 0,
     }
@@ -90,10 +90,17 @@ export default defineConfig({
       dependencies: ['setup'],
     },
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
+     {
+       name: 'authenticated-mobile',
+       testMatch: /.*\.spec\.ts/,
+       testIgnore: /login\.spec\.ts/,
+       grep: /@mobile/,
+       use: { ...devices['iPhone 13'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],  
+      },
+    
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },
