@@ -15,7 +15,7 @@ test.describe('Checkout Flow', () => {
         await page.goto('/inventory.html');
     });
 
-    test('@smoke @regression @e2e User can complete the checkout flow successfully', async ({ page }) => {
+    test('@smoke @regression @e2e @mobile User can complete the checkout flow successfully', async ({ page }) => {
 
         const cartPage = new CartPage(page);
 

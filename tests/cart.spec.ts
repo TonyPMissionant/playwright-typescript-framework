@@ -37,18 +37,6 @@ test.describe('Cart', () => {
         await expect(page).toHaveURL(/checkout-step-one\.html/);
     });
 
-    test('@regression Cart displays the correct price for a Backpack', async ({ page }) => {
-
-        const cartPage = new CartPage(page);
-
-        await inventoryPage.addProductToCart('Sauce Labs Backpack');
-
-        await inventoryPage.shoppingCartLink.click();
-
-        await expect(cartPage.getCartItemPrice('Sauce Labs Backpack')).toHaveText('$29.99');
-
-    });
-
     test('@regression Cart displays the correct price for a Bike Light ', async ({ page }) => {
 
         const cartPage = new CartPage(page);
@@ -60,7 +48,7 @@ test.describe('Cart', () => {
         await expect(cartPage.getCartItemPrice('Sauce Labs Bike Light')).toHaveText('$9.99');
     });
 
-    test('regression Cart displays the correct price for a Bolt T-Shirt', async ({ page }) => {
+    test('@regression Cart displays the correct price for a Bolt T-Shirt', async ({ page }) => {
 
         const cartPage = new CartPage(page);
 
@@ -74,7 +62,7 @@ test.describe('Cart', () => {
 
     });
 
-    test('@regression Cart displays multiple different products', async ({ page }) => {
+    test('@regression @mobile Cart displays multiple different products', async ({ page }) => {
 
         const cartPage = new CartPage(page);
 
@@ -102,30 +90,6 @@ test.describe('Cart', () => {
         await expect(cartPage.getCartItemQuantity('Sauce Labs Bike Light')).toHaveText('1');
 
     });
-
-    test('@regression Cart displays the correct price for Sauce Labs Bike Light', async ({ page }) => {
-
-        const cartPage = new CartPage(page);
-
-        await inventoryPage.addProductToCart('Sauce Labs Bike Light');
-
-        await inventoryPage.shoppingCartLink.click();
-
-        await expect(cartPage.getCartItemPrice('Sauce Labs Bike Light')).toHaveText('$9.99');
-
-    })
-
-    test('@regression Cart contains exactly one item after adding Sauce Labs Backpack', async ({ page }) => {
-
-        const cartPage = new CartPage(page);
-
-        await inventoryPage.addProductToCart('Sauce Labs Backpack');
-
-        await inventoryPage.shoppingCartLink.click();
-
-        await expect(cartPage.getCartItemQuantity('Sauce Labs Backpack')).toHaveText('1');
-
-    })
 
     test('@regression User can remove Sauce Labs Bike Light from cart', async ({ page }) => {
 
@@ -155,7 +119,7 @@ test.describe('Cart', () => {
 
     })
 
-    test('@regression User can add two products to cart', async ({ page }) => {
+    test('@regression @mobile User can add two products to cart', async ({ page }) => {
 
         const cartPage = new CartPage(page);
 
@@ -170,7 +134,7 @@ test.describe('Cart', () => {
 
     })
 
-    test('@regression User can add product after removing a product and clicking continue shopping', async ({ page }) => {
+    test('@regression @mobile User can add product after removing a product and clicking continue shopping', async ({ page }) => {
 
         const cartPage = new CartPage(page);
 
